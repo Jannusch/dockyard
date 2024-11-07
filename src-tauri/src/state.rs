@@ -10,7 +10,7 @@ pub struct AppState {
 
 impl AppState {
     pub fn default() -> Self {
-        let docker = match Docker::connect_with_socket_defaults() {
+        let docker = match Docker::connect_with_socket("unix:///run/user/1000/docker.sock", 120, bollard::API_DEFAULT_VERSION) {
             Ok(docker) => docker,
             Err(e) => {
                 panic!("Failed To Connect: {}", e);
